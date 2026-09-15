@@ -105,5 +105,6 @@ export const machineComponents: MachineComponent[] = [
     function: "Controlam a entrada e a correção da mistura de gases.",
     location: "Ao lado do tubo de gás, no topo da máquina.",
     hotspot: true,
+    image: "/images/components/valvulas.jpg",
   },
 ];
