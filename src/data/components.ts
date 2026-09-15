@@ -22,6 +22,7 @@ export const machineComponents: MachineComponent[] = [
       "Estrutura de aço inoxidável que sustenta e alinha todos os módulos da máquina.",
     location: "Base da seladora, por baixo de tudo.",
     hotspot: true,
+    image: "/images/components/chassi.png",
   },
   {
     id: "placas-metal",
