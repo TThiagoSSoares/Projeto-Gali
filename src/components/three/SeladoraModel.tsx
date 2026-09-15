@@ -64,10 +64,48 @@ const PIECES: Piece[] = [
   { id: "valvulas", geometry: "cylinder", args: [0.05, 0.05, 0.2, 16], position: [0.55, 0.85, -0.4], color: "#9da3a8", material: "metal", explode: [0.3, 0.9, -0.9] },
 
   // Detalhes decorativos (sem hotspot) só pra máquina parecer a foto
-  { geometry: "box", args: [0.6, 0.35, 0.05], position: [1.1, 0.35, 0.76], color: "#0d2b22", material: "pcb", explode: [0.3, 0, 0.6], blink: true },
+  {
+    geometry: "box",
+    args: [0.6, 0.35, 0.05],
+    position: [1.1, 0.35, 0.76],
+    color: "#8fe3b0",
+    material: "pcb",
+    explode: [0.3, 0, 0.6],
+    blink: true,
+  },
   { geometry: "cylinder", args: [0.12, 0.12, 3.0, 20], rotation: [0, 0, Math.PI / 2], position: [0, -0.05, 0.85], color: "#3a3a3a", material: "rubber", explode: [0, -0.5, 0.6] },
-  { geometry: "cylinder", args: [0.03, 0.03, 0.9, 12], rotation: [0, 0, -0.3], position: [0.9, 1.0, -0.5], color: "#1a1a1a", material: "rubber", explode: [0.4, 0.9, -0.3] },
+  { geometry: "cylinder", args: [0.03, 0.03, 0.85, 12], rotation: [0, 0, -0.3], position: [0.9, 0.95, -0.5], color: "#1a1a1a", material: "rubber", explode: [0.4, 0.9, -0.3] },
+  { geometry: "box", args: [0.2, 0.06, 0.09], rotation: [0, 0, -0.3], position: [1.12, 1.35, -0.5], color: "#161616", material: "rubber", explode: [0.4, 0.9, -0.3] },
   { geometry: "torus", args: [0.35, 0.04, 12, 32, Math.PI], rotation: [0, 0, 0], position: [-0.9, 0.9, -0.5], color: "#e6ece9", material: "metal", explode: [-0.3, 0.7, -0.5] },
+
+  // Grade de ventilação na placa lateral
+  ...[-0.5, -0.25, 0, 0.25, 0.5].map((z) => ({
+    geometry: "box" as const,
+    args: [0.02, 0.45, 0.06],
+    position: [1.6, 0.55, z] as [number, number, number],
+    color: "#15181b",
+    material: "metal" as const,
+    explode: [1.1, 0, 0] as [number, number, number],
+  })),
+
+  // Parafusos nos cantos do chassi
+  ...[
+    [-1.5, -0.65],
+    [1.5, -0.65],
+    [-1.5, 0.65],
+    [1.5, 0.65],
+  ].map(([x, z]) => ({
+    geometry: "cylinder" as const,
+    args: [0.03, 0.03, 0.02, 12],
+    position: [x, 0.15, z] as [number, number, number],
+    color: "#4a4d50",
+    material: "metal" as const,
+    explode: [0, -0.9, 0] as [number, number, number],
+  })),
+
+  // Suporte de rolo de etiquetas
+  { geometry: "cylinder", args: [0.02, 0.02, 0.3, 10], position: [1.3, -0.05, 0.65], color: "#2a2a2a", material: "rubber", explode: [0.5, -0.5, 0.5] },
+  { geometry: "cylinder", args: [0.14, 0.14, 0.08, 24], rotation: [Math.PI / 2, 0, 0], position: [1.3, -0.15, 0.65], color: "#ece7d8", material: "rubber", explode: [0.5, -0.5, 0.5] },
 ];
 
 type SeladoraModelProps = {
