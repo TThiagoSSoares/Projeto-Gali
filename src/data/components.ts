@@ -31,6 +31,7 @@ export const machineComponents: MachineComponent[] = [
       "Painéis de revestimento que protegem os componentes internos e dão rigidez ao gabinete.",
     location: "Laterais e parte superior do gabinete.",
     hotspot: true,
+    image: "/images/components/placas-metal.jpg",
   },
   {
     id: "suportes",
@@ -48,6 +49,7 @@ export const machineComponents: MachineComponent[] = [
       "Aquece a barra de selagem para fundir o filme plástico e fechar a embalagem.",
     location: "Sob a bandeja, na área de selagem.",
     hotspot: true,
+    image: "/images/components/resistencia.jpg",
   },
   {
     id: "agulhas",
@@ -57,6 +59,7 @@ export const machineComponents: MachineComponent[] = [
       "Injetam a mistura de gases dentro da embalagem antes de a selagem fechar.",
     location: "Fileira dentro da câmara de selagem.",
     hotspot: true,
+    image: "/images/components/agulhas.jpg",
   },
   {
     id: "arduino",
