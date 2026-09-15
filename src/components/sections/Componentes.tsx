@@ -10,19 +10,23 @@ const CATEGORIES: ComponentCategory[] = [
   "Eletrônica/controle",
 ];
 
-function PecaIcon() {
+function SemFotoIcon() {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      className="h-7 w-7 text-muted"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      aria-hidden="true"
-    >
-      <path d="M12 2l1.9 3.9 4.3.6-3.1 3 0.7 4.3L12 12l-3.8 1.8.7-4.3-3.1-3 4.3-.6z" />
-      <circle cx="12" cy="9.5" r="2" />
-    </svg>
+    <div className="flex flex-col items-center gap-1.5 text-muted">
+      <svg
+        viewBox="0 0 24 24"
+        className="h-6 w-6"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        aria-hidden="true"
+      >
+        <rect x="3" y="4" width="18" height="16" rx="2" />
+        <circle cx="8.5" cy="9.5" r="1.5" />
+        <path d="M21 16l-5.5-5.5L9 17" />
+      </svg>
+      <span className="text-[10px] uppercase tracking-wide">Sem foto</span>
+    </div>
   );
 }
 
@@ -73,17 +77,21 @@ export function Componentes() {
               key={component.id}
               className="overflow-hidden rounded-xl border border-panel-border bg-panel"
             >
-              <div className="flex h-36 items-center justify-center bg-background/40">
+              <div
+                className={`relative flex h-36 items-center justify-center bg-background/40 ${
+                  component.image ? "" : "border-b border-dashed border-panel-border"
+                }`}
+              >
                 {component.image ? (
                   <Image
                     src={component.image}
                     alt={component.name}
-                    width={280}
-                    height={144}
-                    className="h-full w-full object-cover"
+                    fill
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover"
                   />
                 ) : (
-                  <PecaIcon />
+                  <SemFotoIcon />
                 )}
               </div>
               <div className="p-5">
