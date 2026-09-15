@@ -25,6 +25,7 @@ type Piece = {
   material: MaterialKind;
   opacity?: number;
   explode: [number, number, number];
+  blink?: boolean;
 };
 
 // Geometria simples (blocos/cilindros) representando as peças da seladora.
@@ -54,16 +55,16 @@ const PIECES: Piece[] = [
   })),
 
   // Eletrônica/controle
-  { id: "sensor-gas", geometry: "cylinder", args: [0.04, 0.04, 0.25, 16], position: [-0.9, 0.7, 0.55], color: "#48c078", material: "accent", explode: [0, 0.4, 0.9] },
-  { id: "sensor-gas", geometry: "cylinder", args: [0.04, 0.04, 0.25, 16], position: [-0.1, 0.7, 0.55], color: "#48c078", material: "accent", explode: [0, 0.4, 0.9] },
-  { id: "sensor-temp", geometry: "cylinder", args: [0.04, 0.04, 0.25, 16], position: [-0.9, 0.7, -0.55], color: "#e2574c", material: "accent", explode: [0, 0.4, -0.9] },
+  { id: "sensor-gas", geometry: "cylinder", args: [0.04, 0.04, 0.25, 16], position: [-0.9, 0.7, 0.55], color: "#48c078", material: "accent", explode: [0, 0.4, 0.9], blink: true },
+  { id: "sensor-gas", geometry: "cylinder", args: [0.04, 0.04, 0.25, 16], position: [-0.1, 0.7, 0.55], color: "#48c078", material: "accent", explode: [0, 0.4, 0.9], blink: true },
+  { id: "sensor-temp", geometry: "cylinder", args: [0.04, 0.04, 0.25, 16], position: [-0.9, 0.7, -0.55], color: "#e2574c", material: "accent", explode: [0, 0.4, -0.9], blink: true },
   { id: "arduino", geometry: "box", args: [0.5, 0.06, 0.35], position: [1.0, 0.62, 0.35], color: "#357a45", material: "pcb", explode: [0.8, 0.5, 0.4] },
   { id: "esp32", geometry: "box", args: [0.3, 0.05, 0.22], position: [1.0, 0.7, -0.15], color: "#2358ab", material: "pcb", explode: [0.8, 0.7, -0.4] },
   { id: "valvulas", geometry: "cylinder", args: [0.05, 0.05, 0.2, 16], position: [0.4, 0.85, -0.4], color: "#9da3a8", material: "metal", explode: [0.3, 0.9, -0.9] },
   { id: "valvulas", geometry: "cylinder", args: [0.05, 0.05, 0.2, 16], position: [0.55, 0.85, -0.4], color: "#9da3a8", material: "metal", explode: [0.3, 0.9, -0.9] },
 
   // Detalhes decorativos (sem hotspot) só pra máquina parecer a foto
-  { geometry: "box", args: [0.6, 0.35, 0.05], position: [1.1, 0.35, 0.76], color: "#14181c", material: "pcb", explode: [0.3, 0, 0.6] },
+  { geometry: "box", args: [0.6, 0.35, 0.05], position: [1.1, 0.35, 0.76], color: "#0d2b22", material: "pcb", explode: [0.3, 0, 0.6], blink: true },
   { geometry: "cylinder", args: [0.12, 0.12, 3.0, 20], rotation: [0, 0, Math.PI / 2], position: [0, -0.05, 0.85], color: "#3a3a3a", material: "rubber", explode: [0, -0.5, 0.6] },
   { geometry: "cylinder", args: [0.03, 0.03, 0.9, 12], rotation: [0, 0, -0.3], position: [0.9, 1.0, -0.5], color: "#1a1a1a", material: "rubber", explode: [0.4, 0.9, -0.3] },
   { geometry: "torus", args: [0.35, 0.04, 12, 32, Math.PI], rotation: [0, 0, 0], position: [-0.9, 0.9, -0.5], color: "#e6ece9", material: "metal", explode: [-0.3, 0.7, -0.5] },
@@ -77,10 +78,12 @@ type SeladoraModelProps = {
 
 export function SeladoraModel({ exploded, selected, onSelect }: SeladoraModelProps) {
   const meshRefs = useRef<(THREE.Mesh | null)[]>([]);
+  const materialRefs = useRef<(THREE.MeshStandardMaterial | null)[]>([]);
   const factor = useRef(0);
 
-  useFrame((_, delta) => {
+  useFrame(({ clock }, delta) => {
     factor.current = THREE.MathUtils.damp(factor.current, exploded ? 1 : 0, 4, delta);
+    const t = clock.getElapsedTime();
     meshRefs.current.forEach((mesh, i) => {
       if (!mesh) return;
       const p = PIECES[i];
@@ -89,6 +92,15 @@ export function SeladoraModel({ exploded, selected, onSelect }: SeladoraModelPro
         p.position[1] + p.explode[1] * factor.current,
         p.position[2] + p.explode[2] * factor.current,
       );
+
+      if (p.blink) {
+        const material = materialRefs.current[i];
+        const isSelected = Boolean(p.id) && p.id === selected;
+        if (material && !isSelected) {
+          material.emissive.set(p.color);
+          material.emissiveIntensity = 0.3 + 0.7 * Math.abs(Math.sin(t * 2.4 + i));
+        }
+      }
     });
   });
 
@@ -112,13 +124,16 @@ export function SeladoraModel({ exploded, selected, onSelect }: SeladoraModelPro
         };
         const material = (
           <meshStandardMaterial
+            ref={(el) => {
+              materialRefs.current[i] = el;
+            }}
             color={piece.color}
             metalness={preset.metalness}
             roughness={preset.roughness}
             transparent={piece.opacity !== undefined}
             opacity={piece.opacity ?? 1}
-            emissive={isSelected ? piece.color : "#000000"}
-            emissiveIntensity={isSelected ? 0.7 : 0}
+            emissive={isSelected || piece.blink ? piece.color : "#000000"}
+            emissiveIntensity={isSelected ? 0.7 : piece.blink ? 0.3 : 0}
           />
         );
 

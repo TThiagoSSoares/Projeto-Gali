@@ -7,9 +7,13 @@ export function Navbar() {
       <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link
           href="#topo"
-          className="font-heading text-lg font-bold tracking-tight text-foreground"
+          className="flex items-center gap-2 font-heading text-lg font-bold tracking-tight text-foreground"
         >
           {site.name}
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+          </span>
         </Link>
         <ul className="flex items-center gap-4 text-sm sm:gap-6">
           {navItems.map((item) => (
