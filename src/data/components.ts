@@ -80,6 +80,7 @@ export const machineComponents: MachineComponent[] = [
       "Medem a composição do ar dentro da câmara para manter a atmosfera na faixa ideal.",
     location: "Dentro da câmara de selagem, perto das agulhas.",
     hotspot: true,
+    image: "/images/components/sensor-gas.jpg",
   },
   {
     id: "sensor-temp",
