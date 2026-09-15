@@ -1,4 +1,5 @@
 import { parceria, embalagemCategorias } from "@/data/embalagens";
+import { Reveal } from "@/components/Reveal";
 
 function FotoPlaceholder() {
   return (
@@ -41,7 +42,7 @@ export function Embalagens() {
   return (
     <section id="embalagens" className="border-t border-panel-border px-4 py-20">
       <div className="mx-auto max-w-5xl">
-        <div className="text-center">
+        <Reveal className="text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
             Parceria
           </p>
@@ -49,13 +50,13 @@ export function Embalagens() {
             {parceria.nome}
           </h2>
           <p className="mx-auto mt-2 max-w-lg text-muted">{parceria.modelo}</p>
-        </div>
+        </Reveal>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-3">
           {FLUXO.map((passo, i) => (
-            <div key={passo.titulo} className="relative">
+            <Reveal key={passo.titulo} delay={i * 100} className="relative">
               <div
-                className={`h-full rounded-2xl border p-5 ${
+                className={`h-full rounded-2xl border p-5 transition-transform hover:-translate-y-1 ${
                   passo.destaque
                     ? "border-2 border-accent bg-panel"
                     : "border-panel-border bg-panel"
@@ -71,13 +72,13 @@ export function Embalagens() {
                   →
                 </span>
               )}
-            </div>
+            </Reveal>
           ))}
         </div>
 
         <div className="mt-16 flex flex-col gap-10">
-          {embalagemCategorias.map((grupo) => (
-            <div key={grupo.categoria}>
+          {embalagemCategorias.map((grupo, gi) => (
+            <Reveal key={grupo.categoria} delay={gi * 80}>
               <h3 className="font-heading text-xl font-bold text-accent">
                 {grupo.categoria}
               </h3>
@@ -86,7 +87,7 @@ export function Embalagens() {
                 {grupo.itens.map((item) => (
                   <div
                     key={item.id}
-                    className="w-36 shrink-0 snap-start rounded-xl border border-panel-border bg-panel p-3"
+                    className="w-36 shrink-0 snap-start rounded-xl border border-panel-border bg-panel p-3 transition-transform hover:-translate-y-1 hover:border-accent/50"
                   >
                     <FotoPlaceholder />
                     <h4 className="mt-3 font-heading text-base font-bold">
@@ -99,7 +100,7 @@ export function Embalagens() {
                   </div>
                 ))}
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

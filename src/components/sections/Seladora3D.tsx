@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import { machineComponents } from "@/data/components";
+import { Reveal } from "@/components/Reveal";
 
 const SeladoraCanvas = dynamic(() => import("@/components/three/SeladoraCanvas"), {
   ssr: false,
@@ -24,7 +25,7 @@ export function Seladora3D() {
       id="seladora-3d"
       className="flex min-h-screen flex-col items-center gap-6 border-t border-panel-border px-4 py-20"
     >
-      <div className="text-center">
+      <Reveal className="text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
           A seladora
         </p>
@@ -35,18 +36,21 @@ export function Seladora3D() {
           Gire, dê zoom e clique nas peças para entender a montagem. Use a
           vista explodida para ver como elas se encaixam por dentro.
         </p>
-      </div>
+      </Reveal>
 
-      <div className="flex gap-3">
+      <Reveal delay={100} className="flex gap-3">
         <button
           onClick={() => setExploded((v) => !v)}
-          className="rounded-full bg-accent px-5 py-2 text-sm font-semibold text-background transition hover:brightness-110"
+          className="rounded-full bg-accent px-5 py-2 text-sm font-semibold text-background transition hover:scale-105 hover:brightness-110 active:scale-95"
         >
           {exploded ? "Vista normal" : "Vista explodida"}
         </button>
-      </div>
+      </Reveal>
 
-      <div className="relative h-[70vh] w-full max-w-4xl overflow-hidden rounded-2xl border border-panel-border bg-panel">
+      <Reveal
+        delay={200}
+        className="relative h-[70vh] w-full max-w-4xl overflow-hidden rounded-2xl border border-panel-border bg-panel"
+      >
         <SeladoraCanvas
           exploded={exploded}
           selected={selected}
@@ -92,7 +96,7 @@ export function Seladora3D() {
             </p>
           </div>
         )}
-      </div>
+      </Reveal>
     </section>
   );
 }

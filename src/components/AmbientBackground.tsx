@@ -9,8 +9,8 @@ export function AmbientBackground() {
           width: "50vw",
           height: "50vw",
           background: "var(--color-accent)",
-          opacity: 0.16,
-          animation: "drift-a 22s ease-in-out infinite alternate",
+          opacity: 0.18,
+          animation: "drift-a 16s ease-in-out infinite alternate",
         }}
       />
       <div
@@ -21,8 +21,20 @@ export function AmbientBackground() {
           width: "45vw",
           height: "45vw",
           background: "var(--color-accent-warm)",
-          opacity: 0.12,
-          animation: "drift-b 28s ease-in-out infinite alternate",
+          opacity: 0.14,
+          animation: "drift-b 20s ease-in-out infinite alternate",
+        }}
+      />
+      <div
+        className="ambient-orb"
+        style={{
+          top: "30%",
+          left: "40%",
+          width: "30vw",
+          height: "30vw",
+          background: "var(--color-accent)",
+          opacity: 0.1,
+          animation: "drift-c 13s ease-in-out infinite alternate",
         }}
       />
     </div>

@@ -1,4 +1,5 @@
 import { atmosferaComparativo } from "@/data/atmosfera";
+import { Reveal } from "@/components/Reveal";
 
 function GasChart({ variant }: { variant: "map" | "ca" }) {
   const lineColor = variant === "ca" ? "var(--color-accent)" : "var(--color-accent-warm)";
@@ -23,7 +24,7 @@ export function Atmosfera() {
   return (
     <section id="atmosfera" className="border-t border-panel-border px-4 py-20">
       <div className="mx-auto max-w-5xl">
-        <div className="text-center">
+        <Reveal className="text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
             O diferencial
           </p>
@@ -34,10 +35,10 @@ export function Atmosfera() {
             Faixa de O2 dentro da embalagem ao longo do tempo — representação
             ilustrativa.
           </p>
-        </div>
+        </Reveal>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">
-          <div className="rounded-2xl border border-panel-border bg-panel p-6">
+          <Reveal className="rounded-2xl border border-panel-border bg-panel p-6 transition-colors hover:border-accent-warm/50">
             <h3 className="font-heading text-xl font-bold">{map.title}</h3>
             <p className="mt-1 text-sm text-muted">{map.subtitle}</p>
             <div className="mt-5">
@@ -50,9 +51,12 @@ export function Atmosfera() {
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
 
-          <div className="relative rounded-2xl border-2 border-accent bg-panel p-6">
+          <Reveal
+            delay={120}
+            className="relative rounded-2xl border-2 border-accent bg-panel p-6 transition-shadow hover:shadow-[0_0_30px_-8px_var(--color-accent)]"
+          >
             <span className="absolute -top-3 right-6 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-background">
               Diferencial FreshPack
             </span>
@@ -68,14 +72,14 @@ export function Atmosfera() {
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
         </div>
 
-        <div className="mt-8 rounded-xl border border-accent bg-panel p-5">
+        <Reveal delay={220} className="mt-8 rounded-xl border border-accent bg-panel p-5">
           <p className="text-sm font-medium text-foreground sm:text-base">
             {destaque}
           </p>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

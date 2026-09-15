@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { machineComponents, type ComponentCategory } from "@/data/components";
+import { Reveal } from "@/components/Reveal";
 
 const CATEGORIES: ComponentCategory[] = [
   "Estrutura",
@@ -41,7 +42,7 @@ export function Componentes() {
   return (
     <section id="componentes" className="border-t border-panel-border px-4 py-20">
       <div className="mx-auto max-w-5xl">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <Reveal className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
               Montagem
@@ -59,7 +60,7 @@ export function Componentes() {
               <button
                 key={cat}
                 onClick={() => setFiltro(cat)}
-                className={`rounded-full border px-4 py-1.5 text-sm font-medium transition ${
+                className={`rounded-full border px-4 py-1.5 text-sm font-medium transition hover:scale-105 active:scale-95 ${
                   filtro === cat
                     ? "border-accent bg-accent text-background"
                     : "border-panel-border text-muted hover:border-accent hover:text-foreground"
@@ -69,13 +70,14 @@ export function Componentes() {
               </button>
             ))}
           </div>
-        </div>
+        </Reveal>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {visiveis.map((component) => (
-            <div
+          {visiveis.map((component, i) => (
+            <Reveal
               key={component.id}
-              className="overflow-hidden rounded-xl border border-panel-border bg-panel"
+              delay={Math.min(i, 8) * 60}
+              className="overflow-hidden rounded-xl border border-panel-border bg-panel transition-transform hover:-translate-y-1 hover:border-accent/50"
             >
               <div
                 className={`relative flex h-36 items-center justify-center bg-background/40 ${
@@ -106,7 +108,7 @@ export function Componentes() {
                   {component.location}
                 </p>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
