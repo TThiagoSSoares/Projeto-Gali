@@ -16,4 +16,5 @@ export type NavItem = {
 export const navItems: NavItem[] = [
   { label: "Início", href: "#topo" },
   { label: "A Seladora", href: "#seladora-3d" },
+  { label: "Componentes", href: "#componentes" },
 ];
