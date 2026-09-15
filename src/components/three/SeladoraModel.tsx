@@ -34,10 +34,10 @@ const PIECES: Piece[] = [
   // Estrutura
   { id: "chassi", geometry: "box", args: [3.2, 0.28, 1.5], position: [0, 0, 0], color: "#c3c7cc", material: "metal", explode: [0, -0.9, 0] },
   { id: "placas-metal", geometry: "box", args: [0.08, 0.9, 1.5], position: [1.55, 0.55, 0], color: "#aab0b6", material: "metal", explode: [1.1, 0, 0] },
-  { id: "suportes", geometry: "cylinder", args: [0.06, 0.08, 0.3, 16], position: [-1.4, -0.25, -0.6], color: "#242629", material: "rubber", explode: [-0.4, -0.6, -0.4] },
-  { id: "suportes", geometry: "cylinder", args: [0.06, 0.08, 0.3, 16], position: [1.4, -0.25, -0.6], color: "#242629", material: "rubber", explode: [0.4, -0.6, -0.4] },
-  { id: "suportes", geometry: "cylinder", args: [0.06, 0.08, 0.3, 16], position: [-1.4, -0.25, 0.6], color: "#242629", material: "rubber", explode: [-0.4, -0.6, 0.4] },
-  { id: "suportes", geometry: "cylinder", args: [0.06, 0.08, 0.3, 16], position: [1.4, -0.25, 0.6], color: "#242629", material: "rubber", explode: [0.4, -0.6, 0.4] },
+  { geometry: "cylinder", args: [0.06, 0.08, 0.3, 16], position: [-1.4, -0.25, -0.6], color: "#242629", material: "rubber", explode: [-0.4, -0.6, -0.4] },
+  { geometry: "cylinder", args: [0.06, 0.08, 0.3, 16], position: [1.4, -0.25, -0.6], color: "#242629", material: "rubber", explode: [0.4, -0.6, -0.4] },
+  { geometry: "cylinder", args: [0.06, 0.08, 0.3, 16], position: [-1.4, -0.25, 0.6], color: "#242629", material: "rubber", explode: [-0.4, -0.6, 0.4] },
+  { geometry: "cylinder", args: [0.06, 0.08, 0.3, 16], position: [1.4, -0.25, 0.6], color: "#242629", material: "rubber", explode: [0.4, -0.6, 0.4] },
 
   // Câmara de selagem (invólucro decorativo, não clicável)
   { geometry: "box", args: [1.3, 0.5, 1.3], position: [-0.5, 0.55, 0], color: "#e2ede7", material: "glass", opacity: 0.25, explode: [0, 0.9, 0] },

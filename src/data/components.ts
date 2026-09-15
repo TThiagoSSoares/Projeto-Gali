@@ -35,14 +35,6 @@ export const machineComponents: MachineComponent[] = [
     image: "/images/components/placas-metal.jpg",
   },
   {
-    id: "suportes",
-    category: "Estrutura",
-    name: "Suportes",
-    function: "Fixam e nivelam a máquina sobre a bancada.",
-    location: "Pés ajustáveis embaixo do chassi.",
-    hotspot: true,
-  },
-  {
     id: "resistencia",
     category: "Selagem",
     name: "Resistência de selagem",
