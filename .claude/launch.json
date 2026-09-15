@@ -2,18 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "frontend",
+      "name": "freshpack-dev",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
-      "cwd": "${workspaceFolder}/frontend",
-      "port": 5173
-    },
-    {
-      "name": "safe-sorocaba-hub",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--", "--port", "5174"],
-      "cwd": "D:\\Nova pasta (3)\\safe-sorocaba-hub-main\\safe-sorocaba-hub-main",
-      "port": 5174
+      "port": 3000
     }
   ]
 }
