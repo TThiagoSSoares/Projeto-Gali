@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+import Image from "next/image";
 import { machineComponents, type ComponentCategory } from "@/data/components";
 
 const CATEGORIES: ComponentCategory[] = [
@@ -6,50 +10,93 @@ const CATEGORIES: ComponentCategory[] = [
   "Eletrônica/controle",
 ];
 
-export function Componentes() {
+function PecaIcon() {
   return (
-    <section
-      id="componentes"
-      className="border-t border-panel-border px-4 py-20"
+    <svg
+      viewBox="0 0 24 24"
+      className="h-7 w-7 text-muted"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      aria-hidden="true"
     >
+      <path d="M12 2l1.9 3.9 4.3.6-3.1 3 0.7 4.3L12 12l-3.8 1.8.7-4.3-3.1-3 4.3-.6z" />
+      <circle cx="12" cy="9.5" r="2" />
+    </svg>
+  );
+}
+
+export function Componentes() {
+  const [filtro, setFiltro] = useState<ComponentCategory | "Todos">("Todos");
+
+  const visiveis =
+    filtro === "Todos"
+      ? machineComponents
+      : machineComponents.filter((c) => c.category === filtro);
+
+  return (
+    <section id="componentes" className="border-t border-panel-border px-4 py-20">
       <div className="mx-auto max-w-5xl">
-        <div className="text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-            Montagem
-          </p>
-          <h2 className="font-heading text-3xl font-bold sm:text-4xl">
-            Componentes
-          </h2>
-          <p className="mx-auto mt-2 max-w-lg text-muted">
-            As peças que formam a seladora, agrupadas por área da máquina.
-          </p>
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+              Montagem
+            </p>
+            <h2 className="font-heading text-3xl font-bold sm:text-4xl">
+              Componentes
+            </h2>
+            <p className="mt-2 max-w-md text-muted">
+              As peças que formam a seladora. Filtre por área da máquina.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            {(["Todos", ...CATEGORIES] as const).map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setFiltro(cat)}
+                className={`rounded-full border px-4 py-1.5 text-sm font-medium transition ${
+                  filtro === cat
+                    ? "border-accent bg-accent text-background"
+                    : "border-panel-border text-muted hover:border-accent hover:text-foreground"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-12">
-          {CATEGORIES.map((category) => (
-            <div key={category}>
-              <h3 className="font-heading text-xl font-bold text-accent">
-                {category}
-              </h3>
-              <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {machineComponents
-                  .filter((c) => c.category === category)
-                  .map((component) => (
-                    <div
-                      key={component.id}
-                      className="rounded-xl border border-panel-border bg-panel p-5"
-                    >
-                      <h4 className="font-heading text-lg font-bold">
-                        {component.name}
-                      </h4>
-                      <p className="mt-2 text-sm text-muted">
-                        {component.function}
-                      </p>
-                      <p className="mt-3 text-xs italic text-muted">
-                        {component.location}
-                      </p>
-                    </div>
-                  ))}
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {visiveis.map((component) => (
+            <div
+              key={component.id}
+              className="overflow-hidden rounded-xl border border-panel-border bg-panel"
+            >
+              <div className="flex h-36 items-center justify-center bg-background/40">
+                {component.image ? (
+                  <Image
+                    src={component.image}
+                    alt={component.name}
+                    width={280}
+                    height={144}
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <PecaIcon />
+                )}
+              </div>
+              <div className="p-5">
+                <p className="text-xs font-semibold uppercase tracking-wide text-accent">
+                  {component.category}
+                </p>
+                <h3 className="font-heading text-lg font-bold">
+                  {component.name}
+                </h3>
+                <p className="mt-2 text-sm text-muted">{component.function}</p>
+                <p className="mt-3 text-xs italic text-muted">
+                  {component.location}
+                </p>
               </div>
             </div>
           ))}

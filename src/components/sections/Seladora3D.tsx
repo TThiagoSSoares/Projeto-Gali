@@ -54,6 +54,30 @@ export function Seladora3D() {
           onMiss={() => setSelected(null)}
         />
 
+        <div className="absolute right-4 top-4 flex flex-col items-end gap-1.5">
+          <div className="flex items-center gap-3 rounded-full border border-panel-border bg-background/80 px-3 py-1.5 text-xs backdrop-blur">
+            {[
+              { label: "TEMP", value: "4.2°C" },
+              { label: "O2", value: "3.1%" },
+              { label: "CO2", value: "8.4%" },
+            ].map((leitura) => (
+              <span key={leitura.label} className="flex items-center gap-1.5">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
+                </span>
+                <span className="text-muted">{leitura.label}</span>
+                <span className="font-semibold text-foreground">
+                  {leitura.value}
+                </span>
+              </span>
+            ))}
+          </div>
+          <span className="text-[10px] uppercase tracking-wide text-muted">
+            leitura simulada
+          </span>
+        </div>
+
         {selectedComponent && (
           <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-panel-border bg-background/90 p-4 backdrop-blur sm:right-auto sm:w-80">
             <p className="text-xs font-semibold uppercase tracking-wide text-accent">

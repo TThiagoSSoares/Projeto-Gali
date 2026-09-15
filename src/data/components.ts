@@ -10,6 +10,7 @@ export type MachineComponent = {
   function: string;
   location: string;
   hotspot?: boolean;
+  image?: string;
 };
 
 export const machineComponents: MachineComponent[] = [
@@ -64,6 +65,7 @@ export const machineComponents: MachineComponent[] = [
     function: "Controla o ciclo de selagem e a leitura dos sensores.",
     location: "Dentro do painel de controle, ao lado do ESP32.",
     hotspot: true,
+    image: "/images/components/arduino.jpg",
   },
   {
     id: "esp32",
@@ -72,6 +74,7 @@ export const machineComponents: MachineComponent[] = [
     function: "Envia os dados dos sensores para o painel de monitoramento.",
     location: "Dentro do painel de controle.",
     hotspot: true,
+    image: "/images/components/esp32.jpg",
   },
   {
     id: "sensor-gas",
@@ -89,6 +92,7 @@ export const machineComponents: MachineComponent[] = [
     function: "Monitora a temperatura do produto e do ambiente interno.",
     location: "Dentro da câmara de selagem.",
     hotspot: true,
+    image: "/images/components/sensor-temp.jpg",
   },
   {
     id: "valvulas",
