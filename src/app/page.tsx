@@ -3,6 +3,7 @@ import { Hero } from "@/components/sections/Hero";
 import { Seladora3D } from "@/components/sections/Seladora3D";
 import { Componentes } from "@/components/sections/Componentes";
 import { Atmosfera } from "@/components/sections/Atmosfera";
+import { Embalagens } from "@/components/sections/Embalagens";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
         <Seladora3D />
         <Componentes />
         <Atmosfera />
+        <Embalagens />
       </main>
     </>
   );

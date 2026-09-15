@@ -18,4 +18,5 @@ export const navItems: NavItem[] = [
   { label: "A Seladora", href: "#seladora-3d" },
   { label: "Componentes", href: "#componentes" },
   { label: "Atmosfera", href: "#atmosfera" },
+  { label: "Embalagens", href: "#embalagens" },
 ];
