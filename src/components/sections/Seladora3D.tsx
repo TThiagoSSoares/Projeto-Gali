@@ -79,7 +79,9 @@ export function Seladora3D() {
   return (
     <section
       id="seladora-3d"
-      className="flex min-h-screen flex-col items-center gap-6 border-t border-panel-border px-4 py-20"
+      className={`flex flex-col items-center gap-6 border-t border-panel-border px-4 py-20 ${
+        view === "3d" ? "min-h-screen" : ""
+      }`}
     >
       <Reveal className="text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
