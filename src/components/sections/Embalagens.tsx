@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { parceria, embalagemCategorias } from "@/data/embalagens";
 import { Reveal } from "@/components/Reveal";
 
@@ -89,7 +90,19 @@ export function Embalagens() {
                     key={item.id}
                     className="w-36 shrink-0 snap-start rounded-xl border border-panel-border bg-panel p-3 transition-transform hover:-translate-y-1 hover:border-accent/50"
                   >
-                    <FotoPlaceholder />
+                    {item.imagem ? (
+                      <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-white">
+                        <Image
+                          src={item.imagem}
+                          alt={item.nome}
+                          fill
+                          sizes="144px"
+                          className="object-contain p-1.5"
+                        />
+                      </div>
+                    ) : (
+                      <FotoPlaceholder />
+                    )}
                     <h4 className="mt-3 font-heading text-base font-bold">
                       {item.nome}
                     </h4>
