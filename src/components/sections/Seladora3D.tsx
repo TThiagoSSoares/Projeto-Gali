@@ -40,7 +40,7 @@ function FotoCarousel({ onVerModelo }: { onVerModelo: () => void }) {
             alt={foto.alt}
             fill
             sizes="(min-width: 1024px) 60vw, 100vw"
-            className="object-contain p-6"
+            className="object-cover"
             priority={i === 0}
           />
         </div>
@@ -114,7 +114,11 @@ export function Seladora3D() {
 
       <Reveal
         delay={200}
-        className="relative h-[70vh] w-full max-w-4xl overflow-hidden rounded-2xl border border-panel-border bg-panel"
+        className={
+          view === "foto"
+            ? "relative mx-auto aspect-[944/680] w-full max-w-3xl overflow-hidden rounded-2xl border border-panel-border bg-panel"
+            : "relative h-[70vh] w-full max-w-4xl overflow-hidden rounded-2xl border border-panel-border bg-panel"
+        }
       >
         {view === "foto" ? (
           <FotoCarousel onVerModelo={() => setView("3d")} />
