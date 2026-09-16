@@ -19,4 +19,5 @@ export const navItems: NavItem[] = [
   { label: "Componentes", href: "#componentes" },
   { label: "Atmosfera", href: "#atmosfera" },
   { label: "Embalagens", href: "#embalagens" },
+  { label: "Negócio", href: "#negocio" },
 ];
