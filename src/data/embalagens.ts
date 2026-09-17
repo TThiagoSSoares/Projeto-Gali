@@ -4,7 +4,9 @@ export const parceria = {
   nome: "Takepack Embalagens",
   papel: "Fornece a embalagem",
   modelo:
-    "Modelo de permuta: a Takepack fornece as embalagens sem custo para o FreshPack, e em troca a embalagem sai impressa apenas com a logo da Takepack. O supermercado não paga pela embalagem.",
+    "A Takepack fornece as embalagens e filmes compatíveis com a seladora, sem custo para o FreshPack. Em troca, a embalagem pode receber a marca do próprio supermercado — uma possibilidade de marca própria, sem custo de indústria para a rede.",
+  citacao:
+    "A Takepack entra como parceira estratégica no fornecimento das embalagens, enquanto o FreshPack agrega a tecnologia de atmosfera controlada ao processo.",
 };
 
 export type Embalagem = {

@@ -24,17 +24,17 @@ function FotoPlaceholder() {
 const FLUXO = [
   {
     titulo: "Takepack fornece",
-    texto: "Embalagens e filmes compatíveis com a seladora, sem custo para o FreshPack.",
+    texto: "Embalagens e filmes compatíveis com a proposta.",
     destaque: false,
   },
   {
     titulo: "FreshPack realiza",
-    texto: "O processo de selagem com atmosfera controlada.",
+    texto: "Processo de embalagem + atmosfera controlada.",
     destaque: true,
   },
   {
     titulo: "Supermercado recebe",
-    texto: "O produto embalado, pronto pra gôndola — sem custo de embalagem.",
+    texto: "Produto embalado + identidade visual própria.",
     destaque: false,
   },
 ];
@@ -76,6 +76,12 @@ export function Embalagens() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal delay={300} className="mt-6 rounded-xl border border-accent bg-panel p-5 text-center">
+          <p className="text-sm italic text-foreground sm:text-base">
+            &ldquo;{parceria.citacao}&rdquo;
+          </p>
+        </Reveal>
 
         <div className="mt-16 flex flex-col gap-10">
           {embalagemCategorias.map((grupo, gi) => (
