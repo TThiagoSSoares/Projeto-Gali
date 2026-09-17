@@ -4,7 +4,7 @@ export const parceria = {
   nome: "Takepack Embalagens",
   papel: "Fornece a embalagem",
   modelo:
-    "A Takepack fornece as embalagens e filmes compatíveis com a seladora, sem custo para o FreshPack. Em troca, a embalagem pode receber a marca do próprio supermercado — uma possibilidade de marca própria, sem custo de indústria para a rede.",
+    "A Takepack fornece as embalagens e filmes compatíveis com a seladora. O FreshPack repassa essas embalagens ao supermercado, que paga por elas toda semana — é essa receita recorrente que sustenta o negócio. A embalagem ainda pode receber a marca do próprio supermercado, criando uma possibilidade de marca própria.",
   citacao:
     "A Takepack entra como parceira estratégica no fornecimento das embalagens, enquanto o FreshPack agrega a tecnologia de atmosfera controlada ao processo.",
 };

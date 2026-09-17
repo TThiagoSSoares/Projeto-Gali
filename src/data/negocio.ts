@@ -38,7 +38,7 @@ export const ofertas: Record<"venda" | "locacao", Oferta> = {
 export const receitaRecorrente = {
   titulo: "Fornecimento contínuo de embalagens",
   texto:
-    "Além da venda ou locação da máquina, o supermercado compra as embalagens junto à Takepack toda semana, enquanto a seladora estiver em operação — é essa receita recorrente que sustenta o negócio no longo prazo.",
+    "Além da venda ou locação da máquina, o supermercado compra as embalagens do FreshPack toda semana, enquanto a seladora estiver em operação — é essa receita recorrente que sustenta o negócio no longo prazo.",
 };
 
 export const disclaimer =
