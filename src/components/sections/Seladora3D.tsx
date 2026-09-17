@@ -16,7 +16,27 @@ const SeladoraCanvas = dynamic(() => import("@/components/three/SeladoraCanvas")
   ),
 });
 
-function FotoCarousel({ onVerModelo }: { onVerModelo: () => void }) {
+type View = "video" | "foto" | "3d";
+
+const VIEW_LABELS: Record<View, string> = {
+  video: "Vídeo",
+  foto: "Fotos",
+  "3d": "Modelo 3D",
+};
+
+const VIEW_TITLES: Record<View, string> = {
+  video: "Veja a seladora em ação",
+  foto: "Conheça a seladora",
+  "3d": "Explore o modelo em 3D",
+};
+
+const VIEW_SUBTITLES: Record<View, string> = {
+  video: "Simulação gerada por IA do funcionamento da seladora.",
+  foto: "Fotos reais do protótipo.",
+  "3d": "Gire, dê zoom e clique nas peças para entender a montagem. Use a vista explodida para ver como elas se encaixam por dentro.",
+};
+
+function FotoCarousel() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -58,19 +78,12 @@ function FotoCarousel({ onVerModelo }: { onVerModelo: () => void }) {
           />
         ))}
       </div>
-
-      <button
-        onClick={onVerModelo}
-        className="absolute bottom-4 right-4 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-background shadow-lg transition hover:scale-105 hover:brightness-110 active:scale-95"
-      >
-        Ver modelo simulado em 3D
-      </button>
     </div>
   );
 }
 
 export function Seladora3D() {
-  const [view, setView] = useState<"foto" | "3d">("foto");
+  const [view, setView] = useState<View>("video");
   const [exploded, setExploded] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
 
@@ -88,23 +101,29 @@ export function Seladora3D() {
           A seladora
         </p>
         <h2 className="font-heading text-3xl font-bold sm:text-4xl">
-          {view === "foto" ? "Conheça a seladora" : "Explore o modelo em 3D"}
+          {VIEW_TITLES[view]}
         </h2>
-        <p className="mx-auto mt-2 max-w-lg text-muted">
-          {view === "foto"
-            ? "Fotos reais do protótipo. Clique no botão pra abrir o modelo 3D interativo."
-            : "Gire, dê zoom e clique nas peças para entender a montagem. Use a vista explodida para ver como elas se encaixam por dentro."}
-        </p>
+        <p className="mx-auto mt-2 max-w-lg text-muted">{VIEW_SUBTITLES[view]}</p>
+      </Reveal>
+
+      <Reveal delay={100} className="flex gap-2 rounded-full border border-panel-border bg-panel p-1">
+        {(["video", "foto", "3d"] as const).map((v) => (
+          <button
+            key={v}
+            onClick={() => setView(v)}
+            className={`rounded-full px-4 py-1.5 text-sm font-semibold transition ${
+              view === v
+                ? "bg-accent text-background"
+                : "text-muted hover:text-foreground"
+            }`}
+          >
+            {VIEW_LABELS[v]}
+          </button>
+        ))}
       </Reveal>
 
       {view === "3d" && (
-        <Reveal delay={100} className="flex gap-3">
-          <button
-            onClick={() => setView("foto")}
-            className="rounded-full border border-panel-border px-5 py-2 text-sm font-semibold text-muted transition hover:scale-105 hover:border-accent hover:text-foreground active:scale-95"
-          >
-            ← Ver fotos
-          </button>
+        <Reveal delay={150} className="flex gap-3">
           <button
             onClick={() => setExploded((v) => !v)}
             className="rounded-full bg-accent px-5 py-2 text-sm font-semibold text-background transition hover:scale-105 hover:brightness-110 active:scale-95"
@@ -117,14 +136,25 @@ export function Seladora3D() {
       <Reveal
         delay={200}
         className={
-          view === "foto"
-            ? "relative mx-auto aspect-[944/680] w-full max-w-3xl overflow-hidden rounded-2xl border border-panel-border bg-panel"
-            : "relative h-[70vh] w-full max-w-4xl overflow-hidden rounded-2xl border border-panel-border bg-panel"
+          view === "3d"
+            ? "relative h-[70vh] w-full max-w-4xl overflow-hidden rounded-2xl border border-panel-border bg-panel"
+            : "relative mx-auto aspect-[944/680] w-full max-w-3xl overflow-hidden rounded-2xl border border-panel-border bg-panel"
         }
       >
-        {view === "foto" ? (
-          <FotoCarousel onVerModelo={() => setView("3d")} />
-        ) : (
+        {view === "video" && (
+          <video
+            src="/videos/seladora.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="h-full w-full object-cover"
+          />
+        )}
+
+        {view === "foto" && <FotoCarousel />}
+
+        {view === "3d" && (
           <>
             <SeladoraCanvas
               exploded={exploded}
