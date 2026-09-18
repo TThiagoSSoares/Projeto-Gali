@@ -1,18 +1,43 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ofertas, citacaoNegocio, notaContato, contato, disclaimer } from "@/data/negocio";
 import { Reveal } from "@/components/Reveal";
+
+function useCountUp(target: number, duration = 900) {
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    let start: number | null = null;
+    let raf: number;
+
+    function step(timestamp: number) {
+      if (start === null) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setValue(Math.round(target * eased));
+      if (progress < 1) raf = requestAnimationFrame(step);
+    }
+
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [target, duration]);
+
+  return value;
+}
 
 export function Negocio() {
   const [modo, setModo] = useState<"venda" | "locacao">("venda");
   const oferta = ofertas[modo];
+  const contador = useCountUp(oferta.valor);
 
   const whatsappHref = `https://wa.me/${contato.whatsapp}?text=${encodeURIComponent(contato.mensagem)}`;
 
   return (
-    <section id="negocio" className="border-t border-panel-border px-4 py-20">
-      <div className="mx-auto max-w-4xl">
+    <section id="negocio" className="relative overflow-hidden border-t border-panel-border px-4 py-20">
+      <div className="negocio-spotlight" />
+
+      <div className="relative mx-auto max-w-4xl">
         <Reveal className="text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
             Modelo de negócio
@@ -27,15 +52,19 @@ export function Negocio() {
         </Reveal>
 
         <Reveal delay={100} className="mt-8 flex justify-center">
-          <div className="inline-flex rounded-full border border-panel-border bg-panel p-1">
+          <div className="relative inline-flex rounded-full border border-panel-border bg-panel p-1">
+            <span
+              aria-hidden
+              className={`absolute inset-y-1 left-1 w-[calc(50%-4px)] rounded-full bg-accent transition-transform duration-300 ease-out ${
+                modo === "locacao" ? "translate-x-[calc(100%+4px)]" : "translate-x-0"
+              }`}
+            />
             {(["venda", "locacao"] as const).map((key) => (
               <button
                 key={key}
                 onClick={() => setModo(key)}
-                className={`rounded-full px-6 py-2 text-sm font-semibold transition ${
-                  modo === key
-                    ? "bg-accent text-background"
-                    : "text-muted hover:text-foreground"
+                className={`relative z-10 w-28 rounded-full px-6 py-2 text-sm font-semibold transition-colors ${
+                  modo === key ? "text-background" : "text-muted hover:text-foreground"
                 }`}
               >
                 {ofertas[key].label}
@@ -46,13 +75,13 @@ export function Negocio() {
 
         <Reveal
           delay={180}
-          className="mt-6 rounded-2xl border border-accent bg-panel p-6 sm:p-8"
+          className="glow-pulse shine-sweep relative mt-6 overflow-hidden rounded-2xl border-2 border-accent bg-panel p-6 sm:p-8"
         >
           <p className="text-xs font-semibold uppercase tracking-wide text-accent">
             {oferta.label === "Venda" ? "Venda à vista" : "Locação — plano anual"}
           </p>
-          <p className="mt-1 font-heading text-4xl font-bold">
-            {oferta.preco}
+          <p className="mt-1 font-heading text-5xl font-bold tabular-nums sm:text-6xl">
+            R$ {contador.toLocaleString("pt-BR")}
             {oferta.periodo && (
               <span className="ml-2 text-lg font-normal text-muted">
                 {oferta.periodo}

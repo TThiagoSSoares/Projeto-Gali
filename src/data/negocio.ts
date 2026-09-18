@@ -7,6 +7,7 @@ export const contato = {
 
 export type Oferta = {
   label: string;
+  valor: number;
   preco: string;
   periodo?: string;
   detalhe?: string;
@@ -16,6 +17,7 @@ export type Oferta = {
 export const ofertas: Record<"venda" | "locacao", Oferta> = {
   venda: {
     label: "Venda",
+    valor: 52000,
     preco: "R$ 52.000",
     periodo: "à vista",
     bullets: [
@@ -26,6 +28,7 @@ export const ofertas: Record<"venda" | "locacao", Oferta> = {
   },
   locacao: {
     label: "Locação",
+    valor: 3500,
     preco: "R$ 3.500",
     periodo: "/mês",
     detalhe: "Total R$ 42.000/ano · fidelidade de 12 meses",
