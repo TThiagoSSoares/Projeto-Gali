@@ -24,17 +24,20 @@ function FotoPlaceholder() {
 const FLUXO = [
   {
     titulo: "Takepack fornece",
-    texto: "Embalagens e filmes compatíveis com a proposta.",
+    texto:
+      "Apenas as embalagens: a franquia mensal inclusa no plano da seladora, entregue via logística própria direto ao supermercado.",
     destaque: false,
   },
   {
     titulo: "FreshPack realiza",
-    texto: "Processo de embalagem + atmosfera controlada.",
+    texto:
+      "A venda ou locação da seladora, a atmosfera controlada e o processo de selagem — o núcleo do negócio.",
     destaque: true,
   },
   {
-    titulo: "Supermercado recebe",
-    texto: "Produto embalado + identidade visual própria.",
+    titulo: "Distribuição co-branded",
+    texto:
+      "Logo do supermercado em destaque na embalagem + selo \"Takepack\", pronta para a prateleira.",
     destaque: false,
   },
 ];

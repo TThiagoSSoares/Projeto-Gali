@@ -9,6 +9,7 @@ export type Oferta = {
   label: string;
   preco: string;
   periodo?: string;
+  detalhe?: string;
   bullets: string[];
 };
 
@@ -18,28 +19,29 @@ export const ofertas: Record<"venda" | "locacao", Oferta> = {
     preco: "R$ 52.000",
     periodo: "à vista",
     bullets: [
-      "Seladora com atmosfera controlada, instalada na loja",
-      "Instalação e treinamento da equipe inclusos",
-      "Manutenção e calibração dos sensores no primeiro ano",
+      "Propriedade total do equipamento, sem mensalidade.",
+      "Instalação e treinamento inclusos na entrega técnica.",
+      "Compra de embalagens à parte, sob demanda junto à Takepack.",
     ],
   },
   locacao: {
     label: "Locação",
-    preco: "R$ 2.400",
+    preco: "R$ 3.500",
     periodo: "/mês",
+    detalhe: "Total R$ 42.000/ano · fidelidade de 12 meses",
     bullets: [
-      "Sem investimento inicial alto — a máquina é sua enquanto durar o contrato",
-      "Instalação, treinamento, manutenção e calibração inclusos na mensalidade",
-      "Suporte técnico contínuo enquanto o contrato estiver ativo",
+      "Instalação, treinamento, manutenção, calibração e suporte técnico contínuo.",
+      "Franquia de até 5.000 embalagens/mês já inclusa — fornecidas pela parceira Takepack.",
+      "Consumo acima da franquia é cobrado à parte, como embalagem extra.",
     ],
   },
 };
 
-export const receitaRecorrente = {
-  titulo: "Fornecimento contínuo de embalagens",
-  texto:
-    "Além da venda ou locação da máquina, o supermercado compra as embalagens do FreshPack toda semana, enquanto a seladora estiver em operação — é essa receita recorrente que sustenta o negócio no longo prazo.",
-};
+export const citacaoNegocio =
+  "A seladora é o produto que vendemos e locamos. A Takepack só entra para garantir o insumo do plano — as embalagens.";
+
+export const notaContato =
+  "Assim que o plano é assinado, você já pode entrar em contato pra escolher as embalagens da franquia.";
 
 export const disclaimer =
   "Valores estimados com base em equipamentos de atmosfera modificada/controlada similares disponíveis no mercado nacional e internacional. Sujeitos a ajuste conforme configuração final da máquina.";

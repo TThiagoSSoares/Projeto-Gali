@@ -4,9 +4,9 @@ export const parceria = {
   nome: "Takepack Embalagens",
   papel: "Fornece a embalagem",
   modelo:
-    "A Takepack fornece as embalagens e filmes compatíveis com a seladora. O FreshPack repassa essas embalagens ao supermercado, que paga por elas toda semana — é essa receita recorrente que sustenta o negócio. A embalagem ainda pode receber a marca do próprio supermercado, criando uma possibilidade de marca própria.",
+    "Uma parceria de fornecimento, embutida dentro do plano da seladora FreshPack. A Takepack fornece só as embalagens — a franquia mensal do plano de locação, entregue via logística própria direto ao supermercado (drop-shipping B2B). O FreshPack foca no núcleo do negócio: a venda ou locação da seladora, a atmosfera controlada e o processo de selagem.",
   citacao:
-    "A Takepack entra como parceira estratégica no fornecimento das embalagens, enquanto o FreshPack agrega a tecnologia de atmosfera controlada ao processo.",
+    "Protagonismo do varejista: o logo do supermercado fica sempre em destaque na embalagem. A Takepack entra só como selo de tecnologia — zero atrito comercial com a marca do cliente.",
 };
 
 export type Embalagem = {
