@@ -17,8 +17,8 @@ export type Oferta = {
 export const ofertas: Record<"venda" | "locacao", Oferta> = {
   venda: {
     label: "Venda",
-    valor: 52000,
-    preco: "R$ 52.000",
+    valor: 72000,
+    preco: "R$ 72.000",
     periodo: "à vista",
     bullets: [
       "Propriedade total do equipamento, sem mensalidade.",
